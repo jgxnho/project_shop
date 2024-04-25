@@ -17,11 +17,11 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne
-    @Column(name = "item_id")
+    @JoinColumn(name = "item_id")
     private Item item;
 
     @ManyToOne
-    @Column(name = "order_id")
+    @JoinColumn(name = "order_id")
     private Order order;
 
     private int orderPrice; //주문가격
