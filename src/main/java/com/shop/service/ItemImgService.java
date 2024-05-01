@@ -3,10 +3,10 @@ package com.shop.service;
 import com.shop.entity.ItemImg;
 import com.shop.repository.ItemImgRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
@@ -40,7 +40,7 @@ public class ItemImgService {
     }
 
     public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws Exception {
-        if (itemImgFile.isEmpty()) {
+        if (!itemImgFile.isEmpty()) {
             ItemImg savedItemImg = itemImgRepository.findById(itemImgId)
                     .orElseThrow(EntityNotFoundException::new);
 
@@ -50,10 +50,10 @@ public class ItemImgService {
             }
 
             String oriImgName = itemImgFile.getOriginalFilename();
-            String imgName = fileService.uploadFile(itemImgLocation,
-                    oriImgName, itemImgFile.getBytes());
+            String imgName = fileService.uploadFile(itemImgLocation, oriImgName, itemImgFile.getBytes());
             String imgUrl = "/images/item/" + imgName;
             savedItemImg.updateItemImg(oriImgName, imgName, imgUrl);
         }
     }
+
 }
