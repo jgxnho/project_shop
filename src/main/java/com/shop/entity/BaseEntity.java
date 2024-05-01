@@ -18,5 +18,5 @@ public abstract class BaseEntity extends BaseTimeEntity {
     private String createdBy;
 
     @LastModifiedBy
-    private String ModifiedBy;
+    private String modifiedBy;
 }
