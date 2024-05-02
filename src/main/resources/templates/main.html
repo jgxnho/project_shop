@@ -6,7 +6,7 @@
 <th:block layout:fragment="css">
     <style>
         .carousel-inner > .item {
-            height: 817px;
+            height: 567px;
         }
 
         .margin {
@@ -45,7 +45,7 @@
             <div class="carousel-item active item">
                 <img alt="First slide"
                      class="d-block w-100 banner"
-                     src="https://raw.githubusercontent.com/jgxnho/starbucks/main/images/favorite_bg.jpg">
+                     src="https://raw.githubusercontent.com/jgxnho/project_shop/main/src/main/webapp/images/mainevent.png">
             </div>
         </div>
     </div>
@@ -77,7 +77,8 @@
 
             <li class="page-item" th:classappend="${items.number eq 0}?'disabled':''">
                 <a aria-label='Previous'
-                   class="page-link" th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number-1}}">
+                   class="page-link"
+                   th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number-1}}">
                     <span aria-hidden='true'>Previous</span>
                 </a>
             </li>
@@ -85,12 +86,14 @@
             <li class="page-item" th:classappend="${items.number eq page-1}?'active':''"
                 th:each="page: ${#numbers.sequence(start, end)}">
                 <a class="page-link"
-                   th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${page-1}}" th:inline="text">[[${page}]]</a>
+                   th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${page-1}}"
+                   th:inline="text">[[${page}]]</a>
             </li>
 
             <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled':''">
                 <a aria-label='Next'
-                   class="page-link" th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number+1}}">
+                   class="page-link"
+                   th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number+1}}">
                     <span aria-hidden='true'>Next</span>
                 </a>
             </li>
