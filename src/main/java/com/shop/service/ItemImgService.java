@@ -31,7 +31,7 @@ public class ItemImgService {
         if (!StringUtils.isEmpty(oriImgName)) {
             imgName = fileService.uploadFile(itemImgLocation, oriImgName,
                     itemImgFile.getBytes());
-            imgUrl = "/images/item/" + imgName;
+            imgUrl = "/images/" + imgName;
         }
 
         //상품 이미지 정보 저장
@@ -46,7 +46,8 @@ public class ItemImgService {
 
             //기존 이미지 파일 삭제
             if (!StringUtils.isEmpty(savedItemImg.getImgName())) {
-                fileService.deleteFile(itemImgLocation + "/" + savedItemImg.getImgName());
+                fileService.deleteFile(itemImgLocation + "/" +
+                        savedItemImg.getImgName());
             }
 
             String oriImgName = itemImgFile.getOriginalFilename();

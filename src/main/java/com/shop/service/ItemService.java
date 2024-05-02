@@ -41,8 +41,10 @@ public class ItemService {
             ItemImg itemImg = new ItemImg();
             itemImg.setItem(item);
 
-            if (i == 0) itemImg.setRepimgYn("Y");
-            else itemImg.setRepimgYn("N");
+            if (i == 0)
+                itemImg.setRepimgYn("Y");
+            else
+                itemImg.setRepimgYn("N");
 
             itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
         }
@@ -59,19 +61,18 @@ public class ItemService {
             itemImgDtoList.add(itemImgDto);
         }
 
-        Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(EntityNotFoundException::new);
         ItemFormDto itemFormDto = ItemFormDto.of(item);
         itemFormDto.setItemImgDtoList(itemImgDtoList);
         return itemFormDto;
     }
 
     public Long updateItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception {
-
         //상품 수정
         Item item = itemRepository.findById(itemFormDto.getId())
                 .orElseThrow(EntityNotFoundException::new);
         item.updateItem(itemFormDto);
-
         List<Long> itemImgIds = itemFormDto.getItemImgIds();
 
         //이미지 등록
@@ -79,11 +80,12 @@ public class ItemService {
             itemImgService.updateItemImg(itemImgIds.get(i),
                     itemImgFileList.get(i));
         }
+
         return item.getId();
     }
 
     @Transactional(readOnly = true)
-    public Page<Item> getAdminItempage(ItemSearchDto itemSearchDto, Pageable pageable) {
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 
@@ -91,4 +93,5 @@ public class ItemService {
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
+
 }
