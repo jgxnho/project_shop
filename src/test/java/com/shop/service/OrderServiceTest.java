@@ -5,10 +5,12 @@ import com.shop.dto.OrderDto;
 import com.shop.entity.Item;
 import com.shop.entity.Member;
 import com.shop.entity.Order;
+import com.shop.entity.OrderItem;
 import com.shop.repository.ItemRepository;
 import com.shop.repository.MemberRepository;
 import com.shop.repository.OrderRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+
 
 @SpringBootTest
 @Transactional
@@ -66,6 +69,11 @@ class OrderServiceTest {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
 
-        
+        List<OrderItem> orderItems = order.getOrderItems();
+
+        int totalPrice = orderDto.getCount() * item.getPrice();
+
+        Assertions.assertEquals(totalPrice, order.getTotalPrice());
+
     }
 }
