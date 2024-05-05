@@ -83,7 +83,6 @@ public class CartController {
     public @ResponseBody ResponseEntity orderCartItem(@RequestBody CartOrderDto cartOrderDto, Principal principal) {
 
         List<CartOrderDto> cartOrderDtoList = cartOrderDto.getCartOrderDtoList();
-
         if (cartOrderDtoList == null || cartOrderDtoList.size() == 0) {
             return new ResponseEntity<String>("주문할 상품을 선택해주세요.", HttpStatus.FORBIDDEN);
         }
